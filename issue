@@ -1,0 +1,33 @@
+### In the first part create the function which can cache its inverse
+
+makeCacheMatrix <- function(x = matrix()) {
+a <- NULL
+set <- function(y) {
+x <<- y
+a <<- NULL
+}
+
+    get <- function() x
+    setin <- function(inverse) a <<- inverse
+    getin <- function() a
+    list(set = set,
+    get = get,
+    setin = setin,
+    getin = getin)
+}
+
+### This function create the inversion of this matrix. If the value doesn't exist, it will be calculate using the function. If the value already exists, value will be taken from cache:
+
+cacheSolve <- function(x,...)
+{
+a <- x$getin()
+if (! is.null(a))
+{
+message("The matrix inversion cache")
+return(a)
+}
+matrix <- x$get()
+a <- solve(matrix)
+x$setin(a)
+a
+}
